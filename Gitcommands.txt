@@ -1,0 +1,91 @@
+Create and move into directory
+
+mkdir gitdemoproject
+cd gitdemoproject
+---------------------------------------
+create script files
+nano app.sh
+
+#!/bin/bash
+echo "Application started"
+
+nano deploy.sh
+#!/bin/bash
+echo "Deploy application"
+
+nano backup.sh
+#!/bin/bash
+echo "Back up done"
+
+Change to executable file
+chmod +x *.sh
+--------------------------------------------
+Initialize Local Git Repository and check status
+git init
+git status
+----------------------------------------
+Add and commit files
+git add .
+git commit -m "Initial commit started"
+-------------------------------------------
+create a repo in github
+connect local repo to github
+git remote set-url origin https://github.com/dhanainweb97-dev/gitdemoproject.git
+--------------------------------
+Push the code to github by renaming
+
+git branch -M main
+git push -u origin main
+------------------------------------
+create a branch
+git checkout -b feature-login
+
+modify a file, add and commit
+echo "Login feature added" >> app.sh
+git status
+git add .
+git commit -m "Added login feature"
+git checkout main
+git merge feature-login
+cat app.sh
+git push
+git log --oneline --all --graph
+-------------------------------------
+#rebase#
+
+create a new branch
+git checkout -b feature-payment
+echo "Payment feature added" >> deploy.sh
+git status
+git add .
+git commit -m "Added payment feature"
+git checkout main
+
+Create Another Commit on Main
+echo "Git Demo Project" >> README.md
+git add .
+git commit -m "Added README file"
+git checkout feature-payment
+git rebase main
+git log --oneline --all --graph
+git push origin feature-payment
+
+git checkout main
+git merge feature-payment
+git push
+-----------------------------
+#GIT STASH#
+
+echo "Temporary change for stash" >> backup.sh
+git status
+git stash
+git status
+git stash list
+git stash apply
+cat backup.sh
+git add .
+git commit -m "Performed stash demo"
+git push
+
+
+
